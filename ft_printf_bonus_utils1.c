@@ -1,19 +1,35 @@
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+
+//***********************ft_strlen*******************************
+
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+	{
+		i++;
+	}
+	return (i);
+}
 
 
 //**********************ft_putchar**************************
 
-char	ft_putchar(int c, int *len)
+void	ft_putchar(int c, int *len)
 {
 	write(1, &c, 1);
 	(*len)++;
-	return(c);
 }
 
 //**********************ft_putnbr**************************
 
-int	ft_putnbr(int n, int *len)
+void	ft_putnbr(int n, int *len)
 {
 	if (n == -2147483648)
 		ft_putstr("-2147483648", len);
@@ -34,13 +50,12 @@ int	ft_putnbr(int n, int *len)
 			ft_putchar(n % 10 + '0', len);
 		}
 	}
-	return(n);
 }
 
 
 //**********************ft_putstr**************************
 
-char	*ft_putstr(char *s, int *len)
+void	ft_putstr(char *s, int *len)
 {
 	int	i;
 	char tab[] = "(null)";
@@ -56,12 +71,11 @@ char	*ft_putstr(char *s, int *len)
 			i++;
 		}
 	}
-	return(s);
 }
 
 //***********************unsigned*******************
 
-unsigned int	ft_unsig_(unsigned int n, int *len)
+void	ft_unsig_(unsigned int n, int *len)
 {
 	if(n >= 0 && n < 10)
 		ft_putchar(n + '0', len);
@@ -70,7 +84,6 @@ unsigned int	ft_unsig_(unsigned int n, int *len)
 		ft_unsig_(n / 10, len);
 		ft_putchar(n % 10 + '0', len);
 	}
-	return(n);
 }
 
 //******************************hexa*****************

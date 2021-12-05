@@ -1,8 +1,8 @@
 CFILES = ft_printf.c ft_printf_utils1.c
 OFILES = ${CFILES:.c=.o}
 
-#CBONUS = 
-#OBONUS = ${CBONUS:.c=.o}
+CBONUS = ft_printf_bonus.c ft_printf_bonus_utils1.c
+OBONUS = ${CBONUS:.c=.o}
 
 CC = gcc
 W = -Wall -Werror -Wextra
@@ -27,6 +27,6 @@ fclean : clean
 
 re : fclean all
 
-#bonus: all ${OBONUS}
-#	@ar -rcs ${NAME} ${OBONUS} $(OFILES)
-#	@echo "libft.a bonus created"
+bonus: all ${OBONUS}
+	@ar -rcs ${NAME} ${OBONUS} $(OFILES)
+	@echo "libft.a bonus created"
