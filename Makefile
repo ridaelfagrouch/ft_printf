@@ -1,6 +1,3 @@
-CFILES = ft_printf.c ft_printf_utils1.c
-OFILES = ${CFILES:.c=.o}
-
 CBONUS = ft_printf_bonus.c ft_printf_bonus_utils1.c
 OBONUS = ${CBONUS:.c=.o}
 
@@ -11,8 +8,8 @@ NAME = libftprintf.a
 
 all : ${NAME}
 
-${NAME} : ${OFILES} ${INC}
-	@ar -rcs ${NAME} ${OFILES}
+${NAME} : ${OBONUS} ${INC}
+	@ar -rcs ${NAME} ${OBONUS}
 	@echo "libftprintf.a is created"
 
 %.o:%.c
@@ -20,13 +17,11 @@ ${NAME} : ${OFILES} ${INC}
 	@echo "$@ created"
 
 clean:
-	@rm -f ${OFILES} ${OBONUS}
+	@rm -f ${OBONUS}
 
 fclean : clean
 	@rm -f ${NAME}
 
 re : fclean all
 
-bonus: all ${OBONUS}
-	@ar -rcs ${NAME} ${OBONUS} $(OFILES)
-	@echo "libft.a bonus created"
+bonus : all
