@@ -1,23 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_bonus_utils1.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rel-fagr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/06 23:44:51 by rel-fagr          #+#    #+#             */
+/*   Updated: 2021/12/06 23:50:45 by rel-fagr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
-#include <unistd.h>
-#include <string.h>
-
-//***********************ft_strlen*******************************
-
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-	{
-		i++;
-	}
-	return (i);
-}
-
 
 //**********************ft_putchar**************************
 
@@ -52,16 +45,18 @@ void	ft_putnbr(int n, int *len)
 	}
 }
 
-
 //**********************ft_putstr**************************
 
 void	ft_putstr(char *s, int *len)
 {
-	int	i;
-	char tab[] = "(null)";
+	int		i;
 
 	if (!s)
-		ft_putstr(tab, len);
+	{
+		write(1, "(null)", 6);
+		*len += 6;
+		return ;
+	}
 	else
 	{
 		i = 0;
@@ -77,9 +72,9 @@ void	ft_putstr(char *s, int *len)
 
 void	ft_unsig_(unsigned int n, int *len)
 {
-	if(n >= 0 && n < 10)
+	if (n >= 0 && n < 10)
 		ft_putchar(n + '0', len);
-	if(n >= 10)
+	if (n >= 10)
 	{
 		ft_unsig_(n / 10, len);
 		ft_putchar(n % 10 + '0', len);
@@ -93,10 +88,10 @@ void	ft_hexa(unsigned long int n, int *len, char c)
 	if (n > 15)
 	{
 		ft_hexa(n / 16, len, c);
-		n %= 16;
+		n = n % 16;
 	}
 	if (n >= 10 && n < 16 && c == 'X')
-		ft_putchar((n + 55), len);	
+		ft_putchar((n + 55), len);
 	else if (n >= 10 && n < 16 && c == 'x')
 		ft_putchar((n + 87), len);
 	else
